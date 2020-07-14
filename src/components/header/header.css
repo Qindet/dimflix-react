@@ -1,0 +1,39 @@
+.header {
+    margin-top: 1.5rem;
+    padding-left: 20px;
+    position: relative;
+}
+
+.header ul li {
+    list-style: none;
+    margin: 0;
+}
+.header ul {
+
+}
+
+.search {
+    margin-left: 30px;
+    margin-top: 5px;
+}
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-left: 20px;
+}
+
+.header a {
+    color: white;
+    margin-left: 50px;
+    font-size: 24px;
+}
+
+.header a:hover {
+    text-decoration: none;
+    color: darkgray;
+}
+
+.links {
+    margin: 0 auto;
+}
