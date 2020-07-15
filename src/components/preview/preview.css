@@ -1,0 +1,35 @@
+.preview-main {
+    flex-direction: column;
+    padding: 50px 10px;
+    margin-top: 50px;
+}
+
+
+.preview-about {
+    width: 400px;
+    height: 200px;
+   word-break: break-all;
+    font-family: "Roboto Light";
+
+}
+
+.preview-content {
+  margin-left: 10%;
+}
+
+.dimflix-title {
+    font-family: "Agency FB";
+}
+
+.preview-button {
+    width: 150px;
+    height: 40px;
+    margin-right: 5px;
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    margin-top: 200px;
+}
+.preview-button:hover {
+    opacity: 50%;
+}

@@ -1,10 +1,18 @@
 import React from "react";
 import './app.css'
 import Header from "../header";
+import Preview from "../preview";
+import PopularContent from "../popular-content";
+import Footer from "../footer";
 
 const App = () => {
     return (
-      <Header/>
+        <React.Fragment>
+            <Header/>
+            <Preview />
+            <PopularContent />
+            <Footer />
+        </React.Fragment>
     )
 }
 
