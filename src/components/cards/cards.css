@@ -1,6 +1,27 @@
 .cards-main {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 100px;
-    margin-top: 200px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 100px;
+}
+
+.cards-search {
+    margin: 100px 20%;
+
+}
+
+.cards-search input {
+    width: 80%;
+    height: 50px;
+}
+.cards-search button {
+    height: 50px;
+    margin-left: 20px;
+    background-color: red;
+    width: 200px;
+}
+.cards-search button:hover {
+    background-color: black;
+
 }

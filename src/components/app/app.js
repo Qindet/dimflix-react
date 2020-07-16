@@ -8,7 +8,6 @@ import DimflixService from "../../service/dimflix-service";
 import Cards from "../cards";
 
 const App = () => {
-
     const dimflixService = new DimflixService()
 
 
@@ -19,7 +18,9 @@ const App = () => {
             <div className="cont-main">
                 <PopularContent getData={dimflixService.getTrending}/>
             </div>
-            <Cards getData={dimflixService.getTopRated}/>
+            <Cards
+                getTopRatedData={dimflixService.getTopRated}
+                getSearchData={dimflixService.getSearchAll}/>
             <Footer />
         </React.Fragment>
     )
