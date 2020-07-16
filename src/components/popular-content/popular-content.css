@@ -2,7 +2,8 @@
 
 
 .popular-main {
-    margin: 50px;
+
+
 }
 
 .thumbs {
@@ -10,9 +11,23 @@
 }
 
 .item1 {
-    width: 700px;
-    height: 200px;
+
+    cursor: pointer;
 }
 .car-top {
     margin-top: 20px;
 }
+
+
+
+.BrainhubCarousel__arrows:disabled {
+    background-color: gray;
+}
+
+.BrainhubCarousel__arrows {
+    background-color: red;
+}
+
+
+
+

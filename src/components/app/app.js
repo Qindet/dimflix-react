@@ -4,13 +4,22 @@ import Header from "../header";
 import Preview from "../preview";
 import PopularContent from "../popular-content";
 import Footer from "../footer";
+import DimflixService from "../../service/dimflix-service";
+import Cards from "../cards";
 
 const App = () => {
+
+    const dimflixService = new DimflixService()
+
+
     return (
         <React.Fragment>
             <Header/>
             <Preview />
-            <PopularContent />
+            <div className="cont-main">
+                <PopularContent getData={dimflixService.getTrending}/>
+            </div>
+            <Cards getData={dimflixService.getTopRated}/>
             <Footer />
         </React.Fragment>
     )

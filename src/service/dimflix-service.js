@@ -16,13 +16,42 @@ export default class DimflixService {
         return this._transformMovie(res)
     }
 
+    getTrending = async () => {
+        const res = await this.getResources(`/3/trending/all/week?`)
+        return res.results.map(this._transformTrending)
+    }
 
-    _transformMovie = async ({backdrop_path,vote_average, title, overview}) => {
+    getTopRated = async () => {
+        const res = await this.getResources(`/3/movie/top_rated?`)
+        console.log(res.results)
+        return res.results.map(this._transformTopRated)
+    }
+
+    _transformMovie =  ({backdrop_path,vote_average, title, overview}) => {
         return {
             title,
             poster: backdrop_path,
             vote: vote_average,
             overview
+        }
+    }
+
+    _transformTrending =  ({id,title, poster_path}) => {
+        return {
+            id,
+            title,
+            poster: `https://image.tmdb.org/t/p/w500/${poster_path}`
+        }
+    }
+
+    _transformTopRated = ({id,original_title, poster_path,popularity,vote_average,release_date}) => {
+        return {
+            id,
+            title:original_title,
+            poster: `https://image.tmdb.org/t/p/w500/${poster_path}`,
+            popularity,
+            vote:vote_average,
+            date:release_date
         }
     }
 }
