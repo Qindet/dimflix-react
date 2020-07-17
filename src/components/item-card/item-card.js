@@ -1,22 +1,35 @@
 import React from "react";
 import './item-card.css'
 
-const ItemCard = ({title,poster,popularity,vote,date}) => {
+const ContentCard = ({card,field,label}) => {
+    return (
+        <li>
+            <span className="card-text">{label}: </span>
+            <span className="card-text">{card[field]}</span>
+        </li>
+    )
+}
 
-    const realised = date !== undefined ?    <li>Released: <span className="card-date">{date}</span></li> : null
+export {
+    ContentCard
+}
+
+
+const ItemCard = (card) => {
     return (
              <div className="item-details card">
                 <img className="item-image"
-                     src={poster}
+                     src={card.poster}
                      alt="item"/>
                 <div className="card-body">
-                    <h4>{title}</h4>
                     <ul className="list-group list-group-flush">
-                        <li>Popularity: {popularity}</li>
-                        <li>Rating: {vote}</li>
-                        {realised}
+                        {
+                            React.Children.map(card.children, (child) => {
+                            return React.cloneElement(child, {card})
+                        })
+                        }
                     </ul>
-                    <button className="btn btn-secondary">Open</button>
+                    <button className="btn btn-secondary btn-open">Open</button>
                 </div>
              </div>
     )

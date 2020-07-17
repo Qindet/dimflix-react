@@ -3,9 +3,9 @@ export default class DimflixService {
     _apiBase = `https://api.themoviedb.org`
 
     getResources = async (url) => {
-        const res = await fetch(`${this._apiBase}${url}api_key=0442fc3531842a22b74c6969e9941edc&language=en-US&page=1&include_adult=false`)
+        const res = await fetch(`${this._apiBase}${url}api_key=0442fc3531842a22b74c6969e9941edc&language=en-US&page=1`)
         if (!res.ok) {
-            throw new Error(`Could not fetch ${url}`+ `received ${res.status}`)
+            throw new Error(`Could not fetch ${url}, received ${res.status}`)
         }
 
        return await res.json()
@@ -32,10 +32,18 @@ export default class DimflixService {
         return res.results.map(this._transformMultiSearch)
     }
 
-    _transformMovie =  ({backdrop_path,vote_average, title, overview}) => {
+    _transformMovie =  ({id,backdrop_path, vote_average, title, overview}) => {
+        let img
+        if (backdrop_path === null) {
+         img =  'https://image.winudf.com/v2/image/Y29tLlBSSVNTSS5XYWxscGFwZXIuQmxhY2suQmxhY2tCYWNrZ3JvdW5kV2FsbHBhcGVySERfc2NyZWVuXzBfMTUyOTQ1MzU1Nl8wMjM/screen-0.jpg?fakeurl=1&type=.jpg'
+        } else {
+            img = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+        }
+
         return {
+            id,
             title,
-            poster: backdrop_path,
+            poster: img,
             vote: vote_average,
             overview
         }
@@ -61,13 +69,12 @@ export default class DimflixService {
     }
 
     _transformMultiSearch = (props) => {
-
-        let link = props.poster_path == undefined ? `https://image.tmdb.org/t/p/w500/${props.profile_path}` :
+        let link = props.poster_path === undefined ? `https://image.tmdb.org/t/p/w500/${props.profile_path}` :
             `https://image.tmdb.org/t/p/w500/${props.poster_path}`
-        if ((props.poster_path || props.profile_path) == undefined) {
+        if (!(props.poster_path || props.profile_path)) {
             link = `https://vsetattoo.com.ua/wp-content/themes/TattooKarma/assets/imagenotfound.svg`
         }
-        let title = props.title == undefined ? props.name : props.title
+        let title = props.title === undefined ? props.name : props.title
         return {
             id: props.id,
             poster: link,

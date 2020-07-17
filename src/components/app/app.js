@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import './app.css'
 import Header from "../header";
 import Preview from "../preview";
@@ -6,24 +6,52 @@ import PopularContent from "../popular-content";
 import Footer from "../footer";
 import DimflixService from "../../service/dimflix-service";
 import Cards from "../cards";
+import ModalWindow from "../modal-window";
 
-const App = () => {
-    const dimflixService = new DimflixService()
+export default class App extends Component {
+
+     state = {
+         chosenId: '',
+         toShowModal: false
+     }
+
+    dimflixService = new DimflixService()
 
 
-    return (
-        <React.Fragment>
-            <Header/>
-            <Preview />
-            <div className="cont-main">
-                <PopularContent getData={dimflixService.getTrending}/>
-            </div>
-            <Cards
-                getTopRatedData={dimflixService.getTopRated}
-                getSearchData={dimflixService.getSearchAll}/>
-            <Footer />
-        </React.Fragment>
-    )
+    onChoseItem = (id) => {
+         this.setState({chosenId: id})
+    }
+
+    openModal = () => {
+        this.setState((state) => {
+            return {
+                toShowModal: !state.toShowModal
+            }
+        }  )
+    }
+
+
+
+    render() {
+         const {toShowModal, chosenId} = this.state
+         const {getTrending, getTopRated, getSearchAll} = this.dimflixService
+
+        const modal = toShowModal ?<ModalWindow id={chosenId} show={toShowModal} closeModal={this.openModal}/> : null
+
+        return (
+            <React.Fragment>
+                <Header/>
+                {modal}
+                <Preview onChoseItem={this.onChoseItem} openModal={this.openModal}/>
+                <div className="cont-main">
+                    <PopularContent getData={getTrending}/>
+                </div>
+                <Cards
+                    getTopRatedData={getTopRated}
+                    getSearchData={getSearchAll}/>
+                <Footer />
+            </React.Fragment>
+        )
+    }
 }
 
-export default App

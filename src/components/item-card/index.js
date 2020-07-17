@@ -1,3 +1,7 @@
-import ItemCard from "./item-card";
+import ItemCard, {ContentCard} from "./item-card";
+
+export {
+    ContentCard
+}
 
 export default ItemCard

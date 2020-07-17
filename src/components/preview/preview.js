@@ -5,16 +5,14 @@ import DimflixService from "../../service/dimflix-service";
 
 export default class Preview extends Component {
     dimflixService = new DimflixService()
-
     state = {
         item: {},
         hasError: false
     }
 
-
     componentDidMount() {
         this.updatePreview()
-        this.interval = setInterval(this.updatePreview, 5000)
+        this.interval = setInterval(this.updatePreview, 10000)
     }
 
     componentWillUnmount() {
@@ -24,39 +22,54 @@ export default class Preview extends Component {
     updatePreview = () => {
         const id = Math.floor(Math.random()*500)
         this.dimflixService.getRandomMovie(id)
-            .then((item) => this.setState({item}))
+            .then((item) => this.setState({item, hasError: false}))
             .catch(() => this.setState({hasError: true}))
+    }
+
+    onOpenModal = (e) => {
+        const el = e.target.closest('.preview-main')
+        const id = el.dataset.id
+        this.props.onChoseItem(id)
+        this.props.openModal()
     }
 
 
     render() {
 
         const {item} = this.state
-        const {title, poster, vote, overview} = item
+        const {id, title, poster, overview} = item
 
         const imgStyle = {
-            backgroundImage: `url("https://image.tmdb.org/t/p/w500/${poster}")`,
+            backgroundImage: `url(${poster})`,
             backgroundSize: "60% 100%",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center"
         }
 
-        return (
 
-            <div className="d-flex preview-main" style={imgStyle}>
+        const content = <PreviewContent title={title} overview={overview} onOpenModal={this.onOpenModal}/>
+        return (
+            <div className="d-flex preview-main" style={imgStyle} data-id={id}>
                 <div className="preview-content">
-                    <h4 className="dimflix-title">Dimflix Original</h4>
-                    <h1 className="dimflix-title">{title}</h1>
-                    <div className="preview-about">
-                        {overview}
-                    </div>
-                    <div className="d-flex">
-                        <button className="preview-button">Open</button>
-                        <button className="preview-button">2</button>
-                    </div>
+                    {content}
                 </div>
             </div>
 
         )
     }
+}
+
+const PreviewContent = ({title,overview, onOpenModal}) => {
+    return (
+        <React.Fragment>
+            <h4 className="dimflix-title">Dimflix Original</h4>
+            <h1 className="dimflix-title">{title}</h1>
+            <div className="preview-about">
+                {overview}
+            </div>
+            <div className="d-flex">
+                <button className="preview-button" onClick={onOpenModal}>Open</button>
+            </div>
+        </React.Fragment>
+    )
 }

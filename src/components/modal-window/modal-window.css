@@ -1,0 +1,54 @@
+
+.modal {
+    background-color: black;
+    display: block;
+}
+.close {
+    display: block;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+}
+
+.modal-window {
+    width: 520px;
+    border-radius: 5px;
+    background: black;
+    margin: 100px auto ;
+    height: 800px;
+    position: relative;
+}
+
+.modal__main {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__content {
+    margin-left: 20px;
+}
+
+.modal__popularity,.modal__title,.modal__genres,.modal__review,.modal__lang,.modal__homepage {
+    color: white;
+}
+
+.modal__img {
+    height: 250px;
+    width: 500px;
+    margin: 10px;
+    margin-top: 40px;
+}
+
+.modal__close {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    width: 10px;
+    cursor: pointer;
+}
