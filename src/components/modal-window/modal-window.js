@@ -1,15 +1,31 @@
 import React, {Component} from "react";
 import './modal-window.css'
+import DimflixService from "../../service/dimflix-service";
 
 export default class ModalWindow extends Component{
 
+    state = {
+            loading: true
+    }
+
+    dimflixService = new DimflixService()
+
+    componentDidMount() {
+
+    }
 
     onClose = () => {
         this.props.closeModal()
     }
 
+
+
     render() {
-        const content = <ModalContent  onClose={this.onClose} id={this.props.id}/>
+
+        const {loading} = this.state
+        const content = <ModalContent  onClose={this.onClose} />
+
+
 
         return (
             <React.Fragment>
@@ -19,19 +35,19 @@ export default class ModalWindow extends Component{
     }
 }
 
-const ModalContent = ({ onClose, id}) => {
+const ModalContent = ({ onClose}) => {
     return (
         <div className="modal">
             <div className="modal-overlay">
                 <div className="modal-window">
                     <div className="modal__main">
-                        <img className="modal__img" src="img/novote.jpg" alt=""/>
+                        <img className="modal__img" src="https://image.tmdb.org/t/p/w500/" alt=""/>
                         <div className="modal__content">
                             <h1 className="modal__title">
-                                Title
+
                             </h1>
                             <h3 className="modal__genres">
-                                {id}
+
                             </h3>
                             <div className="modal__review">
                                 Good movie :)

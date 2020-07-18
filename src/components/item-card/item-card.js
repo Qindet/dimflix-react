@@ -16,6 +16,8 @@ export {
 
 
 const ItemCard = (card) => {
+    console.log(card)
+
     return (
              <div className="item-details card">
                 <img className="item-image"
@@ -29,7 +31,7 @@ const ItemCard = (card) => {
                         })
                         }
                     </ul>
-                    <button className="btn btn-secondary btn-open">Open</button>
+                    <button className="btn btn-secondary btn-open" onClick={()=>card.onChoseObj(card)}>Open</button>
                 </div>
              </div>
     )

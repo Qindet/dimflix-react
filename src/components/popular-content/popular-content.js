@@ -9,7 +9,8 @@ class PopularContent extends Component{
 // ErroBoundry
     // 2 HOC!?
         state = {
-            items: []
+            items: [],
+            chosen: {}
         }
 
         componentDidMount() {
@@ -18,10 +19,17 @@ class PopularContent extends Component{
                 .catch(() => new Error('Something went wrong'))
         }
 
+        onOpenItem = (e) => {
+            const el = e.target.closest('img')
+            const id = el.dataset.id
+            const obj = this.state.items.find((item) => item.id==id)
+            this.props.onChoseObj(obj)
+        }
+
 
     render() {
             const {items} = this.state
-            const renderItems = items.map(({id,poster}) => <img key={id} className="item1" src={poster} alt="pop-content"/>)
+            const renderItems = items.map(({id,poster}) => <img key={id} data-id={id} className="item1" src={poster} alt="pop-content" onClick={this.onOpenItem}/>)
         return (
             <div className="popular-main">
                 <h1 className="dimflix-title">Popular this week on Dimflix</h1>

@@ -27,17 +27,15 @@ export default class Preview extends Component {
     }
 
     onOpenModal = (e) => {
-        const el = e.target.closest('.preview-main')
-        const id = el.dataset.id
-        this.props.onChoseItem(id)
         this.props.openModal()
+        this.props.onChoseObj(this.state.item)
     }
 
 
     render() {
 
         const {item} = this.state
-        const {id, title, poster, overview} = item
+        const { title, poster, overview, imdb_id} = item
 
         const imgStyle = {
             backgroundImage: `url(${poster})`,
@@ -49,7 +47,7 @@ export default class Preview extends Component {
 
         const content = <PreviewContent title={title} overview={overview} onOpenModal={this.onOpenModal}/>
         return (
-            <div className="d-flex preview-main" style={imgStyle} data-id={id}>
+            <div className="d-flex preview-main" style={imgStyle} data-id={imdb_id}>
                 <div className="preview-content">
                     {content}
                 </div>

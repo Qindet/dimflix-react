@@ -7,9 +7,9 @@ class Cards extends Component{  //Только прорисовка , логик
 //HOC
 
     render() {
-        const {cards} = this.props
+        const {cards, onChoseObj} = this.props
         const renderCards = cards.map((card) =>
-            <ItemCard key={card.id} {...card}>
+            <ItemCard key={card.id} {...card} onChoseObj={onChoseObj}>
                 <ContentCard field="title" label="Name"/>
                 <ContentCard field="popularity" label="Popularity"/>
             </ItemCard>)

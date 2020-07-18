@@ -29,7 +29,7 @@ const WithData = (Wrapped, getData) => {
 
         render() {
             return (
-                <Wrapped {...this.props}  cards={this.state.cards} updateCards={this.updateCards} onChange={this.onChange}/>
+                <Wrapped {...this.props}  cards={this.state.cards} updateCards={this.updateCards} onChange={this.onChange} onChoseObj={this.props.onChoseObj}/>
             )
         }
     }

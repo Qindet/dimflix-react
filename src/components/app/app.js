@@ -11,16 +11,13 @@ import ModalWindow from "../modal-window";
 export default class App extends Component {
 
      state = {
-         chosenId: '',
-         toShowModal: false
+         toShowModal: false,
+         item: {}
      }
 
     dimflixService = new DimflixService()
 
 
-    onChoseItem = (id) => {
-         this.setState({chosenId: id})
-    }
 
     openModal = () => {
         this.setState((state) => {
@@ -30,25 +27,31 @@ export default class App extends Component {
         }  )
     }
 
+    onChoseObj = (item) => {
+         this.setState({item})
+    }
+
 
 
     render() {
-         const {toShowModal, chosenId} = this.state
+        console.log(this.state.item)
+         const {toShowModal} = this.state
          const {getTrending, getTopRated, getSearchAll} = this.dimflixService
 
-        const modal = toShowModal ?<ModalWindow id={chosenId} show={toShowModal} closeModal={this.openModal}/> : null
+        const modal = toShowModal ?<ModalWindow show={toShowModal} closeModal={this.openModal}/> : null
 
         return (
             <React.Fragment>
                 <Header/>
                 {modal}
-                <Preview onChoseItem={this.onChoseItem} openModal={this.openModal}/>
+                <Preview openModal={this.openModal} onChoseObj={this.onChoseObj}/>
                 <div className="cont-main">
-                    <PopularContent getData={getTrending}/>
+                    <PopularContent getData={getTrending} onChoseObj={this.onChoseObj}/>
                 </div>
                 <Cards
                     getTopRatedData={getTopRated}
-                    getSearchData={getSearchAll}/>
+                    getSearchData={getSearchAll}
+                    onChoseObj={this.onChoseObj}/>
                 <Footer />
             </React.Fragment>
         )
