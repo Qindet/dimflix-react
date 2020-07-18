@@ -2,37 +2,23 @@ import React, {Component} from "react";
 import './modal-window.css'
 import DimflixService from "../../service/dimflix-service";
 
-export default class ModalWindow extends Component{
+const ModalWindow = (props) => {
 
-    state = {
-            loading: true
+   const dimflixService = new DimflixService()
+
+
+
+    const onClose = () => {
+        props.closeModal()
     }
 
-    dimflixService = new DimflixService()
-
-    componentDidMount() {
-
-    }
-
-    onClose = () => {
-        this.props.closeModal()
-    }
-
-
-
-    render() {
-
-        const {loading} = this.state
-        const content = <ModalContent  onClose={this.onClose} />
-
-
+        const content = <ModalContent  onClose={onClose} />
 
         return (
             <React.Fragment>
                 {content}
             </React.Fragment>
         )
-    }
 }
 
 const ModalContent = ({ onClose}) => {
@@ -67,3 +53,6 @@ const ModalContent = ({ onClose}) => {
         </div>
     )
 }
+
+
+export default ModalWindow

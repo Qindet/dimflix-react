@@ -31,7 +31,10 @@ const ItemCard = (card) => {
                         })
                         }
                     </ul>
-                    <button className="btn btn-secondary btn-open" onClick={()=>card.onChoseObj(card)}>Open</button>
+                    <button className="btn btn-secondary btn-open" onClick={()=>{
+                        card.onChoseObj(card)
+                        card.openModal()}
+                    }>Open</button>
                 </div>
              </div>
     )

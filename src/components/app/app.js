@@ -46,12 +46,13 @@ export default class App extends Component {
                 {modal}
                 <Preview openModal={this.openModal} onChoseObj={this.onChoseObj}/>
                 <div className="cont-main">
-                    <PopularContent getData={getTrending} onChoseObj={this.onChoseObj}/>
+                    <PopularContent openModal={this.openModal} getData={getTrending} onChoseObj={this.onChoseObj} />
                 </div>
                 <Cards
                     getTopRatedData={getTopRated}
                     getSearchData={getSearchAll}
-                    onChoseObj={this.onChoseObj}/>
+                    onChoseObj={this.onChoseObj}
+                    openModal={this.openModal}/>
                 <Footer />
             </React.Fragment>
         )
