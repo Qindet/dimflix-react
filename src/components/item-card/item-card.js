@@ -16,8 +16,7 @@ export {
 
 
 const ItemCard = (card) => {
-    console.log(card)
-
+        const {children,onChoseObj,openModal, ...obj} = card
     return (
              <div className="item-details card">
                 <img className="item-image"
@@ -32,7 +31,7 @@ const ItemCard = (card) => {
                         }
                     </ul>
                     <button className="btn btn-secondary btn-open" onClick={()=>{
-                        card.onChoseObj(card)
+                        card.onChoseObj(obj)
                         card.openModal()}
                     }>Open</button>
                 </div>

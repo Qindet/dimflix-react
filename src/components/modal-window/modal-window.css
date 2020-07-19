@@ -17,10 +17,11 @@
 }
 
 .modal-window {
-    width: 520px;
+
+    min-width: 520px;
     border-radius: 5px;
     background: black;
-    margin: 100px auto ;
+    margin: 100px 10% ;
     height: 800px;
     position: relative;
 }
@@ -39,10 +40,9 @@
 }
 
 .modal__img {
-    height: 250px;
-    width: 500px;
-    margin: 10px;
-    margin-top: 40px;
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
 }
 
 .modal__close {
@@ -51,4 +51,8 @@
     right: 20px;
     width: 10px;
     cursor: pointer;
+}
+
+.modal__review {
+    font-size: 2rem;
 }

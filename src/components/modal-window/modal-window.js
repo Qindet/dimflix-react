@@ -12,7 +12,7 @@ const ModalWindow = (props) => {
         props.closeModal()
     }
 
-        const content = <ModalContent  onClose={onClose} />
+        const content = <ModalContent  onClose={onClose} {...props}/>
 
         return (
             <React.Fragment>
@@ -21,30 +21,34 @@ const ModalWindow = (props) => {
         )
 }
 
-const ModalContent = ({ onClose}) => {
+const ModalContent = ({ onClose, item}) => {
+    const {title, vote, overview, date, popularity, backdrop_img, media_type} = item
+    const dateInfo = date ? `Released: ${date}`:null
     return (
         <div className="modal">
             <div className="modal-overlay">
                 <div className="modal-window">
                     <div className="modal__main">
-                        <img className="modal__img" src="https://image.tmdb.org/t/p/w500/" alt=""/>
+                        <img className="modal__img" src={backdrop_img} alt=""/>
                         <div className="modal__content">
                             <h1 className="modal__title">
-
+                                {title}
                             </h1>
-                            <h3 className="modal__genres">
-
+                            <h3 className="modal__type">
+                                Type: {media_type}
+                            </h3>
+                            <h3 className="modal__votes">
+                               Rating: {vote}
                             </h3>
                             <div className="modal__review">
-                                Good movie :)
+                                {overview}
                             </div>
                             <span className="modal__popularity">
-                                        100
-                                    </span>
-                            <div className="modal__lang">
-                                RU
-                            </div>
-                            <span className="modal__homepage"></span>
+                                {popularity}
+                            </span>
+                            <span className="modal__date">
+                                {dateInfo}
+                            </span>
                         </div>
                     </div>
                     <span className="modal__close" onClick={onClose}>&#10060;</span>

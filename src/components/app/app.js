@@ -12,7 +12,9 @@ export default class App extends Component {
 
      state = {
          toShowModal: false,
-         item: {}
+         item: {
+
+         }
      }
 
     dimflixService = new DimflixService()
@@ -28,17 +30,19 @@ export default class App extends Component {
     }
 
     onChoseObj = (item) => {
+         const {title, overview, poster, thitle,vote} = item
          this.setState({item})
+
     }
 
 
 
     render() {
-        console.log(this.state.item)
-         const {toShowModal} = this.state
+
+         const {toShowModal,item} = this.state
          const {getTrending, getTopRated, getSearchAll} = this.dimflixService
 
-        const modal = toShowModal ?<ModalWindow show={toShowModal} closeModal={this.openModal}/> : null
+        const modal = toShowModal ?<ModalWindow show={toShowModal} closeModal={this.openModal} item={item}/> : null
 
         return (
             <React.Fragment>
