@@ -24,6 +24,7 @@ const ModalWindow = (props) => {
 const ModalContent = ({ onClose, item}) => {
     const {title, vote, overview, date, popularity, backdrop_img, media_type} = item
     const dateInfo = date ? `Released: ${date}`:null
+    const type = media_type ?    `Type: ${media_type}` : null
     return (
         <div className="modal">
             <div className="modal-overlay">
@@ -35,7 +36,7 @@ const ModalContent = ({ onClose, item}) => {
                                 {title}
                             </h1>
                             <h3 className="modal__type">
-                                Type: {media_type}
+                                {type}
                             </h3>
                             <h3 className="modal__votes">
                                Rating: {vote}
@@ -44,8 +45,9 @@ const ModalContent = ({ onClose, item}) => {
                                 {overview}
                             </div>
                             <span className="modal__popularity">
-                                {popularity}
+                               Popularity: {popularity}
                             </span>
+                            <br/>
                             <span className="modal__date">
                                 {dateInfo}
                             </span>

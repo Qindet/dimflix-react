@@ -19,13 +19,23 @@ export default class DimflixService {
 
     getTrending = async () => {
         const res = await this.getResources(`/3/trending/all/week?`)
-        console.log(res)
         return res.results.map(this._transformTrending)
+    }
+    getTrendingMovies = async () => {
+        const res = await this.getResources(`/3/trending/movie/week?`)
+        return res.results.map(this._transformTrending)
+    }
+    getTrendingTv = async () => {
+        const res = await this.getResources(`/3/trending/tv/week?`)
+        return res.results.map(this._transformTrending)
+    }
+    getTrendingPeople = async () => {
+        const res = await this.getResources(`/3/trending/person/week?`)
+        return res.results.filter(item=>item.profile_path).map(this._transformTrending)
     }
 
     getTopRated = async () => {
         const res = await this.getResources(`/3/movie/top_rated?`)
-
         return res.results.map(this._transformTopRated)
     }
 
@@ -33,7 +43,27 @@ export default class DimflixService {
         const res = await this.getResources(`/3/search/multi?query=${keyword}&`)
         return res.results.map(this._transformMultiSearch)
     }
-
+    getSearchMovies = async (keyword) => {
+        const res = await this.getResources(`/3/search/movie?query=${keyword}&`)
+        return res.results.map(this._transformMultiSearch)
+    }
+    getSearchPeople = async (keyword) => {
+        const res = await this.getResources(`/3/search/person?query=${keyword}&`)
+        return res.results.map(this._transformMultiSearch)
+    }
+    getTopRatedTv = async () => {
+        const res = await this.getResources(`/3/tv/top_rated?`)
+        return res.results.map(this._transformTopRated)
+    }
+    getTopRatedPeople = async () => {
+        const res = await this.getResources(`/3/person/popular?`)
+        console.log(res)
+        return res.results.map(this._transformTopRated)
+    }
+    getSearchTv = async (keyword) => {
+        const res = await this.getResources(`/3/search/tv?query=${keyword}&`)
+        return res.results.map(this._transformMultiSearch)
+    }
     // getByID = async (id) => {
     //     const res = await fetch(`${this._apiBase}/3/find/${id}?api_key=0442fc3531842a22b74c6969e9941edc&language=en-US&external_source=imdb_id`)
     //     const resul = await res.json()
@@ -56,13 +86,19 @@ export default class DimflixService {
             overview,
             date:release_date,
             backdrop_img: `https://image.tmdb.org/t/p/w500${backdrop_path}`,
-            media_type
+            media_type: ''
         }
     }
 
-    _transformTrending =  ({id,popularity,original_title,name, poster_path,backdrop_path, overview, vote_average,release_date, media_type}) => {
+    _transformTrending =  ({id,popularity,original_title,name, poster_path,profile_path,backdrop_path, overview, vote_average,release_date, media_type}) => {
         if (!original_title) {
             original_title= name
+        }
+        if (!poster_path) {
+            poster_path=profile_path
+        }
+        if (!backdrop_path) {
+            backdrop_path=profile_path
         }
         return {
             id,
@@ -77,7 +113,13 @@ export default class DimflixService {
         }
     }
 
-    _transformTopRated = ({id,popularity,original_title, poster_path,backdrop_path,overview,vote_average,release_date, media_type}) => {
+    _transformTopRated = ({id,popularity,name,profile_path,original_title, poster_path,backdrop_path,overview,vote_average,release_date, media_type}) => {
+        if (!poster_path) {
+            poster_path=profile_path
+        }
+        if (!original_title) {
+            original_title=name
+        }
 
         return {
             id,

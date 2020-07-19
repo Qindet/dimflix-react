@@ -35,8 +35,9 @@
     margin-left: 20px;
 }
 
-.modal__popularity,.modal__title,.modal__genres,.modal__review,.modal__lang,.modal__homepage {
+.modal__popularity,.modal__date {
     color: white;
+    font-size: 21px;
 }
 
 .modal__img {

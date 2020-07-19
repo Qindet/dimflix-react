@@ -1,15 +1,16 @@
 import React, {Component} from "react";
 
 
-const WithData = (Wrapped, getData) => {
+const WithData = (Wrapped, getData, getSearch) => {
     return class extends Component {
+
         state = {
             cards: [],
             keyword: ''
         }
 
         componentDidMount() {
-            this.props.getTopRatedData()
+            getData()
                 .then((cards) => this.setState({cards}))
         }
 
@@ -23,11 +24,12 @@ const WithData = (Wrapped, getData) => {
             if (this.state.keyword === '') {
                 return
             }
-            this.props.getSearchData(this.state.keyword)
+          getSearch(this.state.keyword)
                 .then((cards) => this.setState({cards}))
         }
 
         render() {
+
             return (
                 <Wrapped {...this.props}  cards={this.state.cards} updateCards={this.updateCards} onChange={this.onChange} onChoseObj={this.props.onChoseObj}/>
             )

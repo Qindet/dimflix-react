@@ -2,24 +2,28 @@ import React from "react";
 import './header.css'
 import logo from '../../img/logo.png'
 import avatar from "../../img/avatar.jpg"
+import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
         <div className="header d-flex justify-content-center">
-            <a href="#"><img src={logo} alt="logo"/></a>
+            <Link to="/"><img src={logo} alt="logo"/></Link>
             <div className="d-flex" >
                 <ul className="d-flex links">
                     <li>
-                        <a href="#">Home</a>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <a href="#">Tv Shows</a>
+                        <Link to="/movies">Movies</Link>
                     </li>
                     <li>
-                        <a href="#">Movies</a>
+                        <Link to="/tv">Tv Shows</Link>
                     </li>
                     <li>
-                        <a href="#">My list</a>
+                        <Link to="/people">People</Link>
+                    </li>
+                    <li>
+                        <Link to="/mylist">My list</Link>
                     </li>
                 </ul>
             <i className="material-icons search">search</i>
