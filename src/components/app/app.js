@@ -9,6 +9,7 @@ import DimflixService from "../../service/dimflix-service";
 
 import {AllCardsSearch, MovieCardsSearch, PeopleCardsSearch, TvCardsSearch} from "../card-components";
 import ModalWindow from "../modal-window";
+import ErrorBoundry from "../error-boundry";
 
 export default class App extends Component {
 
@@ -39,46 +40,48 @@ export default class App extends Component {
 
          const {toShowModal,item} = this.state
          const {getTrending, getTrendingMovies,getTrendingTv, getTrendingPeople} = this.dimflixService
-        console.log(getTrendingPeople)
+
         const modal = toShowModal ?<ModalWindow show={toShowModal} closeModal={this.openModal} item={item}/> : null
 
 
 
         return (
             <React.Fragment>
-                <Router>
-                    <Header/>
+                <ErrorBoundry>
+                    <Router>
+                        <Header/>
 
-                    <Route path="/" render={() => modal} exact/>
-                    <Route path="/movies" render={() => modal} />
-                    <Route path="/tv" render={() => modal} />
-                    <Route path="/" render={() => <Preview openModal={this.openModal} onChoseObj={this.onChoseObj}/>} exact/>
+                        <Route path="/" render={() => modal} exact/>
+                        <Route path="/movies" render={() => modal} />
+                        <Route path="/tv" render={() => modal} />
+                        <Route path="/" render={() => <Preview openModal={this.openModal} onChoseObj={this.onChoseObj}/>} exact/>
 
-                    <div className="cont-main">
-                        <Route path="/" render={() =>  <PopularContent openModal={this.openModal} getData={getTrending} onChoseObj={this.onChoseObj} />} exact/>
-                    </div>
-                    <Route path="/" render={() => <AllCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} exact/>
-
-
-                    <div className="cont-main">
-                    <Route path="/movies" render={() => <PopularContent openModal={this.openModal} getData={getTrendingMovies} onChoseObj={this.onChoseObj} />} />
-                    </div>
-                    <Route path="/movies" render={() => <MovieCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
-
-                    <div className="cont-main">
-                    <Route path="/tv" render={() => <PopularContent openModal={this.openModal} getData={getTrendingTv} onChoseObj={this.onChoseObj} />} />
-                    </div>
-                    <Route path="/tv" render={() => <TvCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
+                        <div className="cont-main">
+                            <Route path="/" render={() =>  <PopularContent openModal={this.openModal} getData={getTrending} onChoseObj={this.onChoseObj} />} exact/>
+                        </div>
+                        <Route path="/" render={() => <AllCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} exact/>
 
 
-                    <div className="cont-main">
-                        <Route path="/people" render={() => <PopularContent openModal={this.openModal} getData={getTrendingPeople} onChoseObj={this.onChoseObj} />} />
-                    </div>
-                    <Route path="/people" render={() => <PeopleCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
+                        <div className="cont-main">
+                        <Route path="/movies" render={() => <PopularContent openModal={this.openModal} getData={getTrendingMovies} onChoseObj={this.onChoseObj} />} />
+                        </div>
+                        <Route path="/movies" render={() => <MovieCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
 
-                    <Footer />
+                        <div className="cont-main">
+                        <Route path="/tv" render={() => <PopularContent openModal={this.openModal} getData={getTrendingTv} onChoseObj={this.onChoseObj} />} />
+                        </div>
+                        <Route path="/tv" render={() => <TvCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
 
-                </Router>
+                        <Route path="/people" render={() => modal} exact/>
+                        <div className="cont-main">
+                            <Route path="/people" render={() => <PopularContent openModal={this.openModal} getData={getTrendingPeople} onChoseObj={this.onChoseObj} />} />
+                        </div>
+                        <Route path="/people" render={() => <PeopleCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}/>} />
+
+                        <Footer />
+
+                    </Router>
+                </ErrorBoundry>
             </React.Fragment>
         )
     }

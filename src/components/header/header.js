@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const Header = () => {
     return (
         <div className="header d-flex justify-content-center">
-            <Link to="/"><img src={logo} alt="logo"/></Link>
+            <Link to="/"><img className="logo-main" src={logo} alt="logo"/></Link>
             <div className="d-flex" >
                 <ul className="d-flex links">
                     <li>

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import ItemCard, {ContentCard} from "../item-card";
 import './card-components.css'
+import ErrorBoundry from "../error-boundry";
 
 
 class MovieCards extends Component{  //Только прорисовка , логика в НОС
@@ -12,18 +13,22 @@ class MovieCards extends Component{  //Только прорисовка , ло�
             <ItemCard key={card.id} {...card} onChoseObj={onChoseObj} openModal={openModal}>
                 <ContentCard field="title" label="Name"/>
                 <ContentCard field="popularity" label="Popularity"/>
+                <ContentCard field="vote" label="Rating"/>
             </ItemCard>)
 
         return (
-            <React.Fragment>
-                <form className="cards-search" onSubmit={this.props.updateCards}>
-                    <input type="text" onChange={this.props.onChange}/>
-                    <button className="btn btn-primary">Search</button>
-                </form>
-                <div className="cards-main">
-                    {renderCards}
-                </div>
-            </React.Fragment>
+            <ErrorBoundry>
+                <React.Fragment>
+                    <form className="cards-search" onSubmit={this.props.updateCards}>
+                        <input type="text" onChange={this.props.onChange}/>
+                        <button className="btn btn-primary">Search</button>
+                    </form>
+                    <div className="cards-main">
+                        {renderCards}
+                    </div>
+                </React.Fragment>
+            </ErrorBoundry>
+
         )
     }
 }

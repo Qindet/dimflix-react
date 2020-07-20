@@ -64,11 +64,6 @@ export default class DimflixService {
         const res = await this.getResources(`/3/search/tv?query=${keyword}&`)
         return res.results.map(this._transformMultiSearch)
     }
-    // getByID = async (id) => {
-    //     const res = await fetch(`${this._apiBase}/3/find/${id}?api_key=0442fc3531842a22b74c6969e9941edc&language=en-US&external_source=imdb_id`)
-    //     const resul = await res.json()
-    //     return resul.movie_results[0] || resul.person_results[0] || resul.tv_episode_results[0] || resul.tv_results[0] || resul.tv_season_results[0]
-    // }
 
     _transformMovie =  ({popularity,backdrop_path, vote_average, title, overview, release_date, media_type}) => {
         let img
@@ -120,7 +115,9 @@ export default class DimflixService {
         if (!original_title) {
             original_title=name
         }
-
+        if (!backdrop_path) {
+            backdrop_path=profile_path
+        }
         return {
             id,
             title:original_title,

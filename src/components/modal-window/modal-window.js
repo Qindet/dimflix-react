@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './modal-window.css'
 import DimflixService from "../../service/dimflix-service";
+import ErrorBoundry from "../error-boundry";
 
 const ModalWindow = (props) => {
 
@@ -15,9 +16,12 @@ const ModalWindow = (props) => {
         const content = <ModalContent  onClose={onClose} {...props}/>
 
         return (
-            <React.Fragment>
-                {content}
-            </React.Fragment>
+            <ErrorBoundry>
+                <React.Fragment>
+                    {content}
+                </React.Fragment>
+            </ErrorBoundry>
+
         )
 }
 
@@ -25,6 +29,7 @@ const ModalContent = ({ onClose, item}) => {
     const {title, vote, overview, date, popularity, backdrop_img, media_type} = item
     const dateInfo = date ? `Released: ${date}`:null
     const type = media_type ?    `Type: ${media_type}` : null
+    const voteInfo = vote ? `Rating: ${vote}`: null
     return (
         <div className="modal">
             <div className="modal-overlay">
@@ -39,7 +44,7 @@ const ModalContent = ({ onClose, item}) => {
                                 {type}
                             </h3>
                             <h3 className="modal__votes">
-                               Rating: {vote}
+                                {voteInfo}
                             </h3>
                             <div className="modal__review">
                                 {overview}
@@ -52,6 +57,7 @@ const ModalContent = ({ onClose, item}) => {
                                 {dateInfo}
                             </span>
                         </div>
+                        <button className="btn btn-modal">Add to my List</button>
                     </div>
                     <span className="modal__close" onClick={onClose}>&#10060;</span>
                 </div>

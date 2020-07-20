@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './preview.css'
 import DimflixService from "../../service/dimflix-service";
+import ErrorBoundry from "../error-boundry";
 
 
 export default class Preview extends Component {
@@ -47,17 +48,20 @@ export default class Preview extends Component {
 
         const content = <PreviewContent title={title} overview={overview} onOpenModal={this.onOpenModal}/>
         return (
-            <div className="d-flex preview-main" style={imgStyle} data-id={imdb_id}>
-                <div className="preview-content">
-                    {content}
+            <ErrorBoundry>
+                <div className="d-flex preview-main" style={imgStyle} data-id={imdb_id}>
+                    <div className="preview-content">
+                        {content}
+                    </div>
                 </div>
-            </div>
+            </ErrorBoundry>
 
         )
     }
 }
 
 const PreviewContent = ({title,overview, onOpenModal}) => {
+
     return (
         <React.Fragment>
             <h4 className="dimflix-title">Dimflix Original</h4>
@@ -67,6 +71,7 @@ const PreviewContent = ({title,overview, onOpenModal}) => {
             </div>
             <div className="d-flex">
                 <button className="preview-button" onClick={onOpenModal}>Open</button>
+                <button className="preview-button" onClick={onOpenModal}>Add to my List</button>
             </div>
         </React.Fragment>
     )

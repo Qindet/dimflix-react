@@ -41,8 +41,8 @@
 }
 
 .modal__img {
-    height: 100%;
-    width: 50%;
+    height: 50%;
+    width: 30%;
     margin: 0 auto;
 }
 
@@ -56,4 +56,15 @@
 
 .modal__review {
     font-size: 2rem;
+}
+
+.btn-modal {
+    background-color: transparent;
+    border: 1px solid white;
+    width: 20%;
+    margin: 0 auto;
+}
+
+.btn-modal:hover {
+    opacity: 50%;
 }

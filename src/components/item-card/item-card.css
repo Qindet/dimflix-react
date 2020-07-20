@@ -50,3 +50,11 @@
 .card-text {
     font-size: 20px;
 }
+
+.btn-add {
+    background-color: transparent;
+    position: absolute;
+    bottom: 20px;
+    left: -100px;
+    width: 20%;
+}
