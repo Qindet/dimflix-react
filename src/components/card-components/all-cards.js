@@ -9,9 +9,9 @@ class AllCards extends Component{  //Только прорисовка , лог�
 
     render() {
 
-        const {cards, onChoseObj, openModal} = this.props
+        const {cards, onChoseObj, openModal, onAddItem} = this.props
         const renderCards = cards.map((card) =>
-            <ItemCard key={card.id} {...card} onChoseObj={onChoseObj} openModal={openModal}>
+            <ItemCard key={card.id} {...card} onChoseObj={onChoseObj} openModal={openModal} onAddItem={onAddItem}>
                 <ContentCard field="title" label="Name"/>
                 <ContentCard field="popularity" label="Popularity"/>
                 <ContentCard field="vote" label="Rating"/>

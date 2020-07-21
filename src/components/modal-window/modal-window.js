@@ -25,7 +25,7 @@ const ModalWindow = (props) => {
         )
 }
 
-const ModalContent = ({ onClose, item}) => {
+const ModalContent = ({ onClose, item, onAddItem}) => {
     const {title, vote, overview, date, popularity, backdrop_img, media_type} = item
     const dateInfo = date ? `Released: ${date}`:null
     const type = media_type ?    `Type: ${media_type}` : null
@@ -57,7 +57,7 @@ const ModalContent = ({ onClose, item}) => {
                                 {dateInfo}
                             </span>
                         </div>
-                        <button className="btn btn-modal">Add to my List</button>
+                        <button className="btn btn-modal" onClick={() =>onAddItem(item)}>Add to my List</button>
                     </div>
                     <span className="modal__close" onClick={onClose}>&#10060;</span>
                 </div>

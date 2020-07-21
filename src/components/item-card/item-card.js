@@ -30,7 +30,7 @@ const ItemCard = (card) => {
                         })
                         }
                     </ul>
-                    <button className="btn btn-secondary btn-add">Add to my List</button>
+                    <button className="btn btn-secondary btn-add" onClick={()=>card.onAddItem(obj)}>Add to my List</button>
                     <button className="btn btn-secondary btn-open" onClick={()=>{
                         card.onChoseObj(obj)
                         card.openModal()}

@@ -27,14 +27,14 @@ export default class Preview extends Component {
             .catch(() => this.setState({hasError: true}))
     }
 
-    onOpenModal = (e) => {
+    onOpenModal = () => {
         this.props.openModal()
         this.props.onChoseObj(this.state.item)
     }
 
 
     render() {
-
+        console.log(this.props)
         const {item} = this.state
         const { title, poster, overview, imdb_id} = item
 
@@ -45,8 +45,7 @@ export default class Preview extends Component {
             backgroundPosition: "center"
         }
 
-
-        const content = <PreviewContent title={title} overview={overview} onOpenModal={this.onOpenModal}/>
+        const content = <PreviewContent title={title} overview={overview} onOpenModal={this.onOpenModal} onAddItem={() => this.props.onAddItem(item)}/>
         return (
             <ErrorBoundry>
                 <div className="d-flex preview-main" style={imgStyle} data-id={imdb_id}>
@@ -60,7 +59,7 @@ export default class Preview extends Component {
     }
 }
 
-const PreviewContent = ({title,overview, onOpenModal}) => {
+const PreviewContent = ({title,overview, onOpenModal, onAddItem}) => {
 
     return (
         <React.Fragment>
@@ -71,7 +70,7 @@ const PreviewContent = ({title,overview, onOpenModal}) => {
             </div>
             <div className="d-flex">
                 <button className="preview-button" onClick={onOpenModal}>Open</button>
-                <button className="preview-button" onClick={onOpenModal}>Add to my List</button>
+                <button className="preview-button" onClick={onAddItem}>Add to my List</button>
             </div>
         </React.Fragment>
     )

@@ -30,6 +30,7 @@ class PopularContent extends Component{
 
 
     render() {
+        console.log(this.props)
             const {items} = this.state
             const renderItems = items.map(({id,poster}) => <img key={id} data-id={id} className="item1" src={poster} alt="pop-content" onClick={this.onOpenModal}/>)
         return (
