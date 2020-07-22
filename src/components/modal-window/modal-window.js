@@ -1,14 +1,8 @@
-import React, {Component} from "react";
+import React from "react";
 import './modal-window.css'
-import DimflixService from "../../service/dimflix-service";
 import ErrorBoundry from "../error-boundry";
 
 const ModalWindow = (props) => {
-
-   const dimflixService = new DimflixService()
-
-
-
     const onClose = () => {
         props.closeModal()
     }

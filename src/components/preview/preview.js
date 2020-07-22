@@ -34,7 +34,6 @@ export default class Preview extends Component {
 
 
     render() {
-        console.log(this.props)
         const {item} = this.state
         const { title, poster, overview, imdb_id} = item
 

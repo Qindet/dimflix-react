@@ -1,27 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
+import './my-list.css'
 
-const MyList = ({item}) => {
 
-    const [items, setItems] = useState([{}])
+const MyList = ({item, onChoseObj, onOpenModal}) => {
 
-    useEffect(() => {
-        setItems((state) => {
-            console.log(state)
-            let arr = [...state]
-            arr.push(item)
-            return {
-                arr
+    const choseCard = (item) => {
+        onChoseObj(item)
+        onOpenModal()
+    }
+
+    const updateItems = (items) => {
+        return items.map(item => {
+            if (!item.id) {
+                return null
             }
+            return (
+                <img key={item.id} className="card-mylist" src={item.poster} onClick={() => choseCard(item)} alt="img"/>
+            )
         })
-    },[item])
-
-    const updateItems = (item) => {
 
     }
-    console.log(items)
-    return (
-        <div>
 
+    const content = updateItems(item)
+    if (content.length === 1) {
+        return  <div className="mylist-text">Add something to your list :)</div>
+    }
+    return (
+        <div className="d-flex mylist-main">
+            {content}
         </div>
     )
 }

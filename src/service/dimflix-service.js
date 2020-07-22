@@ -65,7 +65,7 @@ export default class DimflixService {
         return res.results.map(this._transformMultiSearch)
     }
 
-    _transformMovie =  ({popularity,backdrop_path, vote_average, title, overview, release_date, media_type}) => {
+    _transformMovie =  ({id,popularity,backdrop_path, vote_average, title, overview, release_date, media_type}) => {
         let img
         if (backdrop_path === null) {
          img =  'https://image.winudf.com/v2/image/Y29tLlBSSVNTSS5XYWxscGFwZXIuQmxhY2suQmxhY2tCYWNrZ3JvdW5kV2FsbHBhcGVySERfc2NyZWVuXzBfMTUyOTQ1MzU1Nl8wMjM/screen-0.jpg?fakeurl=1&type=.jpg'
@@ -74,6 +74,7 @@ export default class DimflixService {
         }
 
         return {
+            id,
             title,
             popularity,
             poster: img,

@@ -22,20 +22,19 @@ class PopularContent extends Component{
 
         onOpenModal = (e) => {
             const el = e.target.closest('img')
-            const id = el.dataset.id
-            const obj = this.state.items.find((item) => item.id==id)
+            const id = +el.dataset.id
+            const obj = this.state.items.find((item) => item.id===id)
             this.props.onChoseObj(obj)
             this.props.openModal()
         }
 
 
     render() {
-        console.log(this.props)
+
             const {items} = this.state
             const renderItems = items.map(({id,poster}) => <img key={id} data-id={id} className="item1" src={poster} alt="pop-content" onClick={this.onOpenModal}/>)
         return (
             <ErrorBoundry>
-
                 <div className="popular-main">
                     <h1 className="dimflix-title">Popular this week on Dimflix</h1>
                     <Carousel  //popularContent HOC then (carousle in HOC)

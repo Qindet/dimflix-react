@@ -17,7 +17,7 @@ export default class App extends Component {
      state = {
          toShowModal: false,
          item: {},
-         itemToList: {}
+         itemToList: [{}]
      }
 
     dimflixService = new DimflixService()
@@ -36,20 +36,28 @@ export default class App extends Component {
          this.setState({item})
     }
 
-    onAddItem = (itemToList) => {
-        console.log(itemToList)
+    onAddItem = (item) => {
+        this.setState(({itemToList}) => {
+            let arr = [...itemToList]
+            let id = item.id
+            const idx = itemToList.findIndex(item => item.id === id)
+            if (idx === -1) {
+                arr.push(item)
+            }
+            return {
+                itemToList: arr
+            }
+        })
     }
 
 
 
     render() {
-        console.log(this.onAddItem)
 
          const {toShowModal,item} = this.state
          const {getTrending, getTrendingMovies,getTrendingTv, getTrendingPeople} = this.dimflixService
 
         const modal = toShowModal ?<ModalWindow show={toShowModal} closeModal={this.openModal} item={item}  onAddItem={this.onAddItem}/> : null
-
 
 
         return (
@@ -85,8 +93,8 @@ export default class App extends Component {
                         </div>
                         <Route path="/people" render={() => <PeopleCardsSearch onChoseObj={this.onChoseObj} openModal={this.openModal}  onAddItem={this.onAddItem}/>} />
 
-
-                        <MyList item={this.state.itemToList}/>
+                        <Route path="/mylist" render={() => modal} />
+                        <Route path="/mylist" render={() => <MyList item={this.state.itemToList} onChoseObj={this.onChoseObj} onOpenModal={this.openModal}/>}/>
                         <Footer />
 
                     </Router>

@@ -1,4 +1,4 @@
-import React from "react";
+
 import DimflixService from "../../service/dimflix-service";
 import WithData from "../hoc-helpers";
 import AllCards from "./all-cards";
